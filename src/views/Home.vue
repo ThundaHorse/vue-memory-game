@@ -1,18 +1,45 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <div class="jumbotron jumbotron-fluid">
+      <h1>Memory Game!</h1>
+      <p>Match Cards to win..</p>
+    </div>
+    <div>
+      <MatchCard />
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import MatchCard from "../components/MatchCard";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "home",
+  name: "Home",
   components: {
-    HelloWorld
+    MatchCard
   }
 };
 </script>
+
+<style scoped>
+.jumbotron.jumbotron-fluid {
+  text-align: center;
+}
+
+.jumbotron.jumbotron-fluid {
+  height: 80px;
+  background-color: #232935;
+  min-height: 30vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.jumbotron.jumbotron-fluid p {
+  color: #8c8b8b;
+}
+</style>
