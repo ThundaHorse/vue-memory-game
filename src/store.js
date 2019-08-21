@@ -15,16 +15,7 @@ function shuffle(a) {
 }
 
 function generateDeck() {
-  let symbols = [
-    "Yeet",
-    "YurYeet",
-    "Yurt",
-    "Skrt",
-    "Skirt",
-    "Brrt",
-    "Brick",
-    "Skididy"
-  ];
+  let symbols = ["A", "B", "C", "D", "E", "F", "G", "H"];
   let deck = [];
 
   for (var i = 0; i < 16; i++) {
