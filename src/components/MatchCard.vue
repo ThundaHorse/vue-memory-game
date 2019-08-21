@@ -2,7 +2,9 @@
   <div class="home">
     <div class="container">
       <div class="row">
-        <div class="col-sm-3" v-for="(card, index) in allCards" :key="card.idx">
+        <div class="col-sm-3" v-for="(card, index) in allCards" :key="index">
+          {{ index }}
+          <br />
           <div class="MemoryCard" @click="flipCard(index)">
             <div
               v-bind:class="{
@@ -97,7 +99,7 @@ export default {
   },
   computed: mapGetters(["allCards"]),
   methods: {
-    ...mapActions(["fetchCards", "flipCard", "unflipCard"])
+    ...mapActions(["fetchCards", "flipCard", "unflipCards"])
   },
   created() {
     this.fetchCards();

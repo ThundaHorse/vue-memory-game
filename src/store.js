@@ -38,8 +38,7 @@ function generateDeck() {
 export default new Vuex.Store({
   state: {
     cardDeck: [],
-    pickedCards: [],
-    score: 0
+    pickedCards: []
   },
   getters: {
     allCards: state => state.cardDeck
@@ -48,58 +47,60 @@ export default new Vuex.Store({
     fetchCards({ commit }) {
       commit("setCards", generateDeck());
     },
+
     flipCard({ commit }, cardIndex) {
       let newDeck = this.state.cardDeck.map(card => {
-        return { ...card };
+        return card;
       });
-      let matches = this.state.score;
-      if (newDeck[cardIndex].isFlipped) return;
+
+      if (newDeck[cardIndex].isFlipped) {
+        return;
+      }
       newDeck[cardIndex].isFlipped = true;
 
-      let newPickedCards = this.state.pickedCards.concat(cardIndex);
-      // if second card is selected, compare the two
-      // if cards are not identical, flip back over
-      if (newPickedCards.length === 2) {
-        var card1Index = newPickedCards[0];
-        var card2Index = newPickedCards[1];
-        var card1 = newDeck[card1Index];
-        var card2 = newDeck[card2Index];
+      // let pickedPairs = this.state.pickedCards.concat(newDeck[cardIndex]);
+      commit("pickedCards", newDeck[cardIndex]);
+      console.log(this.state.pickedCards);
+
+      if (this.state.pickedCards.length === 2) {
+        var card1Idx = newDeck.indexOf(this.state.pickedCards[0]);
+        var card2Idx = newDeck.indexOf(this.state.pickedCards[1]);
+        var card1 = newDeck[card1Idx];
+        var card2 = newDeck[card2Idx];
 
         if (card1.symbol !== card2.symbol) {
-          // unflip both cards
           setTimeout(() => {
-            this.unflipCards(card1Index, card2Index);
+            commit("unflipCards", card1Idx, card2Idx);
           }, 1000);
         }
-
-        // Increment score if successful match
         if (card1.symbol === card2.symbol) {
-          matches += 1;
+          let picked = [];
+          commit("resetPicked", picked);
         }
-
-        // Reset picked cards to select another pair
-        newPickedCards = [];
       }
-      commit("flipCard", newDeck, matches);
+      commit("setCards", newDeck);
     },
+
     unflipCards({ commit }, card1Index, card2Index) {
       let newDeck = this.state.deck.map(card => {
+        // console.log(card);
         return { ...card };
       });
-
       newDeck[card1Index].isFlipped = false;
       newDeck[card2Index].isFlipped = false;
-
-      commit("unflipCards", newDeck);
+      console.log(newDeck[card1Index]);
+      commit("setCards", newDeck);
     }
   },
   mutations: {
     setCards: (state, cards) => (state.cardDeck = cards),
-    flipCard: (state, deck, matches) => (
-      (state.cardDeck = deck), (state.score = matches)
-    ),
-    unflipCards: (state, deck) => {
-      state.cardDeck = deck;
+    resetPicked: (state, picked) => (state.pickedCards = picked),
+    pickedCards: (state, picked) => state.pickedCards.push(picked),
+    unflipCards: (state, idx1, idx2) => {
+      // state.cardDeck = deck;
+      state.cardDeck[idx1].isFlipped = false;
+      state.cardDeck[idx2].isFlipped = false;
+      // state.cardDeck;
     }
   }
 });
