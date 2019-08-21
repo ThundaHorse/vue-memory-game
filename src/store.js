@@ -52,55 +52,45 @@ export default new Vuex.Store({
       let newDeck = this.state.cardDeck.map(card => {
         return card;
       });
-
       if (newDeck[cardIndex].isFlipped) {
         return;
       }
       newDeck[cardIndex].isFlipped = true;
-
-      // let pickedPairs = this.state.pickedCards.concat(newDeck[cardIndex]);
       commit("pickedCards", newDeck[cardIndex]);
       console.log(this.state.pickedCards);
 
       if (this.state.pickedCards.length === 2) {
         var card1Idx = newDeck.indexOf(this.state.pickedCards[0]);
         var card2Idx = newDeck.indexOf(this.state.pickedCards[1]);
-        var card1 = newDeck[card1Idx];
-        var card2 = newDeck[card2Idx];
+        var cardOptions = {
+          card1: card1Idx,
+          card2: card2Idx
+        };
 
-        if (card1.symbol !== card2.symbol) {
+        if (newDeck[card1Idx].symbol !== newDeck[card2Idx].symbol) {
           setTimeout(() => {
-            commit("unflipCards", card1Idx, card2Idx);
+            commit("unflipCards", cardOptions);
           }, 1000);
         }
-        if (card1.symbol === card2.symbol) {
-          let picked = [];
-          commit("resetPicked", picked);
-        }
+        let picked = [];
+        commit("resetPicked", picked);
       }
       commit("setCards", newDeck);
     },
 
     unflipCards({ commit }, card1Index, card2Index) {
-      let newDeck = this.state.deck.map(card => {
-        // console.log(card);
-        return { ...card };
-      });
-      newDeck[card1Index].isFlipped = false;
-      newDeck[card2Index].isFlipped = false;
-      console.log(newDeck[card1Index]);
-      commit("setCards", newDeck);
+      this.state.cardDeck[card1Index].isFlipped = false;
+      this.state.cardDeck[card2Index].isFlipped = false;
+      commit("setCards", this.state.cardDeck);
     }
   },
   mutations: {
     setCards: (state, cards) => (state.cardDeck = cards),
     resetPicked: (state, picked) => (state.pickedCards = picked),
     pickedCards: (state, picked) => state.pickedCards.push(picked),
-    unflipCards: (state, idx1, idx2) => {
-      // state.cardDeck = deck;
-      state.cardDeck[idx1].isFlipped = false;
-      state.cardDeck[idx2].isFlipped = false;
-      // state.cardDeck;
+    unflipCards: (state, options) => {
+      state.cardDeck[options.card1].isFlipped = false;
+      state.cardDeck[options.card2].isFlipped = false;
     }
   }
 });

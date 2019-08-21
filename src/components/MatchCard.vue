@@ -3,7 +3,6 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-3" v-for="(card, index) in allCards" :key="index">
-          {{ index }}
           <br />
           <div class="MemoryCard" @click="flipCard(index)">
             <div
