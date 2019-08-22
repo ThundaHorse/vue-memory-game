@@ -4,7 +4,7 @@
       <h1>Memory Game!</h1>
       <p>Match Cards to win..</p>
     </div>
-    <div>
+    <div class="matchcard">
       <MatchCard />
     </div>
   </div>
@@ -30,7 +30,7 @@ export default {
 .jumbotron.jumbotron-fluid {
   height: 80px;
   background-color: #232935;
-  min-height: 30vh;
+  /* min-height: 30vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
