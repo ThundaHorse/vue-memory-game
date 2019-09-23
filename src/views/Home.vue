@@ -2,22 +2,47 @@
   <div class="home">
     <div class="jumbotron jumbotron-fluid">
       <h1>Memory Game!</h1>
-      <p>Match Cards to win..</p>
+      <p>Select what you would like to do!</p>
     </div>
-    <div class="matchcard">
+
+    <div class="container" id="radioOptions">
+      <div>
+        <input type="radio" v-model="selection" id="options" name="matching" value="match" checked />
+        <label for="match">Match</label>
+      </div>
+      <div>
+        <input type="radio" v-model="selection" id="options" name="sent" value="sentence" checked />
+        <label for="sentence">Sentence</label>
+      </div>
+      <div>
+        <input type="radio" v-model="selection" id="options" name="fill" value="fill" checked />
+        <label for="fillIn">Fill In the Blank</label>
+      </div>
+    </div>
+
+    <div v-if="selection =='match'" class="matchcard">
       <MatchCard />
+    </div>
+    <div v-if="selection == 'sentence'">
+      <Sentences />
     </div>
   </div>
 </template>
 
 <script>
 import MatchCard from "../components/MatchCard";
-import { mapGetters, mapActions } from "vuex";
+import Sentences from "../components/Sentences";
 
 export default {
   name: "Home",
   components: {
-    MatchCard
+    MatchCard,
+    Sentences
+  },
+  data: function() {
+    return {
+      selection: ""
+    };
   }
 };
 </script>
