@@ -1,6 +1,8 @@
 <template>
   <div class="sentences">
-    <p>Test</p>
+    <div class="container">
+      <p>Testing in progress</p>
+    </div>
   </div>
 </template>
 
