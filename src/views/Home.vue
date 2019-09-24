@@ -15,7 +15,7 @@
         <label for="sentence">Sentence</label>
       </div>
       <div>
-        <input type="radio" v-model="selection" id="options" name="fill" value="fill" checked />
+        <input type="radio" v-model="selection" id="options" name="fillIn" value="fillIn" checked />
         <label for="fillIn">Fill In the Blank</label>
       </div>
     </div>
@@ -26,18 +26,23 @@
     <div v-if="selection == 'sentence'">
       <Sentences />
     </div>
+    <div v-if="selection == 'fillIn'">
+      <FillInBlanks />
+    </div>
   </div>
 </template>
 
 <script>
 import MatchCard from "../components/MatchCard";
 import Sentences from "../components/Sentences";
+import FillInBlanks from "../components/FillInBlanks";
 
 export default {
   name: "Home",
   components: {
     MatchCard,
-    Sentences
+    Sentences,
+    FillInBlanks
   },
   data: function() {
     return {
