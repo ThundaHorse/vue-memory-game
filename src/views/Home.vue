@@ -4,19 +4,27 @@
       <h1>Memory Game!</h1>
       <p>Select what you would like to do!</p>
     </div>
-
     <div class="container" id="radioOptions">
-      <div>
-        <input type="radio" v-model="selection" id="options" name="matching" value="match" checked />
-        <label for="match">Match</label>
-      </div>
-      <div>
-        <input type="radio" v-model="selection" id="options" name="sent" value="sentence" checked />
-        <label for="sentence">Sentence</label>
-      </div>
-      <div>
-        <input type="radio" v-model="selection" id="options" name="fillIn" value="fillIn" checked />
-        <label for="fillIn">Fill In the Blank</label>
+      <div class="row">
+        <div class="column">
+          <input
+            type="radio"
+            v-model="selection"
+            id="options"
+            name="matching"
+            value="match"
+            checked
+          />
+          <label for="match">Match</label>
+        </div>
+        <div class="column">
+          <input type="radio" v-model="selection" id="options" name="sent" value="sentence" checked />
+          <label for="sentence">Sentence</label>
+        </div>
+        <div class="column">
+          <input type="radio" v-model="selection" id="options" name="fillIn" value="fillIn" checked />
+          <label for="fillIn">Fill In the Blank</label>
+        </div>
       </div>
     </div>
 
@@ -73,5 +81,8 @@ export default {
 
 .jumbotron.jumbotron-fluid p {
   color: #8c8b8b;
+}
+.column {
+  width: 33%;
 }
 </style>

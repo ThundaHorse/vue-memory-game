@@ -1,7 +1,7 @@
 <template>
   <div class="fillIn">
     <div class="container">
-      <p>Testing in progress</p>
+      <div v-for="(question, index) in allSentences" :key="index">{{ question.question }}</div>
     </div>
   </div>
 </template>
@@ -10,12 +10,19 @@
 </style>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: "FillInBlanks",
   data: function() {
     return {};
   },
-  methods: {},
-  created() {}
+  computed: mapGetters(["allSentences"]),
+  methods: {
+    ...mapActions(["fetchSentences"])
+  },
+  created() {
+    this.fetchSentences();
+  }
 };
 </script>
