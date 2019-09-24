@@ -26,19 +26,39 @@ function generateDeck() {
   return deck;
 }
 
+function generateSentences() {
+  let questions = [
+    {
+      question: "What is life?",
+      answer: "What?"
+    },
+    {
+      question: "What is love?",
+      answer: "Baby don't hurt me."
+    }
+  ];
+
+  shuffle(questions);
+  return questions;
+}
+
 export default new Vuex.Store({
   state: {
     cardDeck: [],
-    pickedCards: []
+    pickedCards: [],
+    sentences: []
   },
   getters: {
-    allCards: state => state.cardDeck
+    allCards: state => state.cardDeck,
+    allSentences: state => state.sentences
   },
   actions: {
     fetchCards({ commit }) {
       commit("setCards", generateDeck());
     },
-
+    fetchSentences({ commit }) {
+      commit("setSentences", generateSentences());
+    },
     flipCard({ commit }, cardIndex) {
       let newDeck = this.state.cardDeck.map(card => {
         return card;
@@ -68,7 +88,6 @@ export default new Vuex.Store({
       }
       commit("setCards", newDeck);
     },
-
     unflipCards({ commit }, card1Index, card2Index) {
       this.state.cardDeck[card1Index].isFlipped = false;
       this.state.cardDeck[card2Index].isFlipped = false;
@@ -82,6 +101,7 @@ export default new Vuex.Store({
     unflipCards: (state, options) => {
       state.cardDeck[options.card1].isFlipped = false;
       state.cardDeck[options.card2].isFlipped = false;
-    }
+    },
+    setSentences: (state, sentences) => (state.sentences = sentences)
   }
 });

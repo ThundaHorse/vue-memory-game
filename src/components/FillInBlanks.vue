@@ -14,6 +14,8 @@ export default {
   name: "FillInBlanks",
   data: function() {
     return {};
-  }
+  },
+  methods: {},
+  created() {}
 };
 </script>

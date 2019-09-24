@@ -1,12 +1,18 @@
 <template>
   <div class="sentences">
     <div class="container">
-      <p>Testing in progress</p>
+      <h1>Score {{ currentScore }}</h1>
+      <div v-for="(question, index) in allSentences" :key="index">{{ question.question }}</div>
+      <br />
+      <div v-for="answer in allSentences" :key="answer.answer">
+        <input type="radio" v-model="selected" :value="answer.answer" />
+        <label :for="answer.answer">{{ answer.answer }}</label>
+      </div>
     </div>
   </div>
 </template>
 
-<style scoped>
+<style>
 </style>
 
 <script>
@@ -15,14 +21,17 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Sentences",
   data: function() {
-    return {};
+    return {
+      selected: "",
+      currentScore: 0
+    };
   },
-  computed: mapGetters(["allCards"]),
+  computed: mapGetters(["allSentences"]),
   methods: {
-    ...mapActions(["fetchCards", "flipCard", "unflipCards"])
+    ...mapActions(["fetchSentences"])
   },
   created() {
-    this.fetchCards();
+    this.fetchSentences();
   }
 };
 </script>
