@@ -2,7 +2,7 @@
   <div class="addQuestion">
     <div class="container">
       <h1>Enter your question</h1>
-      <form v-on:submit.prevent="addQuestions(questionBody, questionAnswer)">
+      <form @submit.prevent="addQuestions(questionBody, questionAnswer)">
         <input v-model="questionBody" />
         <br />
         <h1>Enter your answer</h1>
@@ -37,6 +37,8 @@ export default {
         question: body,
         answer: bodyAnswer
       });
+      this.questionBody = "";
+      this.questionAnswer = "";
     }
   }
 };
