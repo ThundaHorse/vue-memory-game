@@ -25,6 +25,10 @@
           <input type="radio" v-model="selection" id="options" name="fillIn" value="fillIn" checked />
           <label for="fillIn">Fill In the Blank</label>
         </div>
+        <div class="column">
+          <input type="radio" v-model="selection" id="options" name="addQ" value="addQ" checked />
+          <label for="addQ">Add Questions</label>
+        </div>
       </div>
     </div>
 
@@ -38,6 +42,9 @@
       <div v-if="selection == 'fillIn'">
         <FillInBlanks />
       </div>
+      <div v-if="selection == 'addQ'">
+        <AddQuestion />
+      </div>
     </div>
   </div>
 </template>
@@ -46,13 +53,15 @@
 import MatchCard from "../components/MatchCard";
 import Sentences from "../components/Sentences";
 import FillInBlanks from "../components/FillInBlanks";
+import AddQuestion from "../components/AddQuestion";
 
 export default {
   name: "Home",
   components: {
     MatchCard,
     Sentences,
-    FillInBlanks
+    FillInBlanks,
+    AddQuestion
   },
   data: function() {
     return {
@@ -83,6 +92,6 @@ export default {
   color: #8c8b8b;
 }
 .column {
-  width: 33%;
+  width: 25%;
 }
 </style>

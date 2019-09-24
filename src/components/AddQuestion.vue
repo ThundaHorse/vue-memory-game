@@ -1,6 +1,19 @@
 <template>
   <div class="addQuestion">
-    <h1>Message</h1>
+    <div class="container">
+      <h1>Enter your question</h1>
+      <form v-on:submit.prevent="addQuestions(questionBody, questionAnswer)">
+        <input v-model="questionBody" />
+        <br />
+        <h1>Enter your answer</h1>
+        <input v-model="questionAnswer" />
+        <br />
+        <br />
+        <button class="btn btn-round btn-primary" value="submit">Submit</button>
+      </form>
+    </div>
+    <!-- Visual for questions -->
+    <div v-for="(q, index) in newQuestion" :key="index">{{ q }}</div>
   </div>
 </template>
 
@@ -11,9 +24,20 @@
 export default {
   name: "AddQuestion",
   data: function() {
-    return {};
+    return {
+      questionBody: "",
+      questionAnswer: "",
+      newQuestion: []
+    };
   },
   created: function() {},
-  methods: {}
+  methods: {
+    addQuestions(body, bodyAnswer) {
+      this.newQuestion.push({
+        question: body,
+        answer: bodyAnswer
+      });
+    }
+  }
 };
 </script>
