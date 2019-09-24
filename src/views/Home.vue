@@ -20,14 +20,16 @@
       </div>
     </div>
 
-    <div v-if="selection =='match'" class="matchcard">
-      <MatchCard />
-    </div>
-    <div v-if="selection == 'sentence'">
-      <Sentences />
-    </div>
-    <div v-if="selection == 'fillIn'">
-      <FillInBlanks />
+    <div class="selectionOptions">
+      <div v-if="selection =='match'" class="matchcard">
+        <MatchCard />
+      </div>
+      <div v-if="selection == 'sentence'">
+        <Sentences />
+      </div>
+      <div v-if="selection == 'fillIn'">
+        <FillInBlanks />
+      </div>
     </div>
   </div>
 </template>
